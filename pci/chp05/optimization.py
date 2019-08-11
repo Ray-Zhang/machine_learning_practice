@@ -150,13 +150,14 @@ destination = 'LGA'
 
 flights = {}
 #
-for line in open('E:\\repos\\machine_learning_practice\\pci\\chp05\\schedule.txt'):
+for line in open('./schedule.txt'):
     origin, dest, depart, arrive, price = line.strip().split(',')
     flights.setdefault((origin, dest), [])
 
     # Add details to the list of possible flights
     flights[(origin, dest)].append((depart, arrive, int(price)))
 
+# Exercise 3
 def geneticoptimize(domain,costf,popsize=50,step=1,
                     mutprob=0.2,elite=0.2,maxiter=100):
     # Mutation Operation
@@ -182,6 +183,7 @@ def geneticoptimize(domain,costf,popsize=50,step=1,
     # How many winners from each generation?
     topelite=int(elite*popsize)
   
+    lasttop = None
     # Main loop 
     for i in range(maxiter):
         scores=[(costf(v),v) for v in pop if v is not None]
@@ -190,6 +192,9 @@ def geneticoptimize(domain,costf,popsize=50,step=1,
     
         # Start with the pure winners
         pop=ranked[0:topelite]
+        if pop == lasttop:
+            break
+        lasttop = pop.copy()
     
         # Add mutated and bred forms of the winners
         while len(pop)<popsize:
@@ -209,3 +214,11 @@ def geneticoptimize(domain,costf,popsize=50,step=1,
         print(scores[0][0])
     
     return scores[0][1]
+
+# exercise 2
+def multistartanneal(times, domain, costf, T=10000.0, cool=0.95, step=1):
+    solutions = [annealingoptimize(domain, costf, T, cool, step) for i in range(times)]
+    solutionswithcost = map(lambda x: (x, costf(x)), solutions)
+    return max(solutionswithcost, key=lambda x: x[1])[0]
+
+    

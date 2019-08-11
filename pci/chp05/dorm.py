@@ -16,6 +16,17 @@ prefs=[('Toby', ('Bacchus', 'Hercules')),
        ('Laura', ('Bacchus', 'Hercules')), 
        ('James', ('Hercules', 'Athena'))]
 
+prefspair=[('Toby', ('Bacchus', 'Hercules')),
+       ('Steve', ('Zeus', 'Pluto')),
+       ('Karen', ('Athena', 'Zeus')),
+       ('Sarah', ('Zeus', 'Pluto')),
+       ('Dave', ('Athena', 'Bacchus')), 
+       ('Jeff', ('Hercules', 'Pluto')), 
+       ('Fred', ('Pluto', 'Athena')), 
+       ('Suzie', ('Bacchus', 'Hercules')), 
+       ('Laura', ('Bacchus', 'Hercules')), 
+       ('James', ('Hercules', 'Athena'))]
+
 # [(0,9),(0,8),(0,7),(0,6),...,(0,0)]
 domain=[(0,(len(dorms)*2)-i-1) for i in range(0,len(dorms)*2)]
 
